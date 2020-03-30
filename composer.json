@@ -1,5 +1,5 @@
 {
-    "name": "nacmartin/phpexecjs",
+    "name": "trc/phpexecjs",
     "description": "Run JavaScript code from PHP",
     "type": "library",
     "license": "MIT",
@@ -7,6 +7,10 @@
         {
             "name": "nacho",
             "email": "nacho@limenius.com"
+        },
+        {
+            "name": "luuc",
+            "email": "luuc.verburgh@gmail.com"
         }
     ],
     "autoload": {
