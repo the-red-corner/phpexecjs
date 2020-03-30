@@ -224,22 +224,21 @@ JS;
 
     protected function findBinaryPath()
     {
-        $pathStr = getenv('PATH');
-        $paths = explode(PATH_SEPARATOR, $pathStr);
-        foreach ($paths as $path) {
-            foreach ($this->binary as $binary) {
-                $binaryPath = $path.DIRECTORY_SEPARATOR.$binary;
+        $nodePath = getenv('NODE_PATH');
+
+        foreach ($this->binary as $binary) {
+            $binaryPath = $nodePath.DIRECTORY_SEPARATOR.$binary;
+            if (is_executable($binaryPath)) {
+                return $binaryPath;
+            }
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                $binaryPath = $binaryPath.'.exe';
                 if (is_executable($binaryPath)) {
                     return $binaryPath;
                 }
-                if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-                    $binaryPath = $binaryPath.'.exe';
-                    if (is_executable($binaryPath)) {
-                        return $binaryPath;
-                    }
-                }
             }
         }
+
 
         foreach ($this->binary as $binary) {
             if ($wichBinaryPath = exec('which '.$binary)) {
